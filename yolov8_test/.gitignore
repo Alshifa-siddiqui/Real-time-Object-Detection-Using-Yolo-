@@ -1,0 +1,12 @@
+# Ignore virtual environments
+.venv/
+venv/
+yolov8_test/venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# System files
+.DS_Store
+Thumbs.db
