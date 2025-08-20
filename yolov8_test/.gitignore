@@ -1,28 +1,26 @@
-```gitignore
 # Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.egg-info/
-.build/
-dist/
+*.log
 
-# Virtual envs
+# Virtual environments
 .venv/
 venv/
 
-# Jupyter
-.ipynb_checkpoints/
+# Model weights
+*.pt
 
-# OS / Editors
-.DS_Store
-Thumbs.db
-.vscode/
-.idea/
+# Videos & large outputs
+*.mp4
+*.avi
+*.mov
+*.gif
 
-# Data / Outputs
+# Images (only ignore if you don’t want outputs tracked)
+*.jpg
+*.png
+
+# YOLO runs directory (if created later)
 runs/
-outputs/
-assets/*.mp4
-assets/*.avi
