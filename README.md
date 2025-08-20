@@ -102,7 +102,7 @@ python yolov8_test/main.py --source 0 --model yolov8s.pt --conf 0.35
 
 ## 8) License
 
-MIT — do whatever, just keep the notice.
+MIT 
 
 ## 9) Acknowledgements
 
