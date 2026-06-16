@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Model weights (auto-downloaded on first run)
+*.pt
+
+# Videos & large outputs
+*.mp4
+*.avi
+*.mov
+
+# YOLO runs directory
+runs/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
