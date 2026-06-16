@@ -57,8 +57,11 @@ while frame_count < max_frames:
     out.write(annotated_frame)
     frame_count += 1
 
-    # Quit on 'q' key
+    # Quit on 'q' key...
     if cv2.waitKey(1) & 0xFF == ord("q"):
+        break
+    # ...or when the window is closed via the X button.
+    if cv2.getWindowProperty("YOLOv8 Detection", cv2.WND_PROP_VISIBLE) < 1:
         break
 
 # Clean up

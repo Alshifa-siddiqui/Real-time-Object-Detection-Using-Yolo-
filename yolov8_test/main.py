@@ -25,6 +25,9 @@ from ultralytics import YOLO
 # File extensions we treat as still images rather than video streams.
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".webp", ".tif", ".tiff"}
 
+# Title of the live-detection window.
+WINDOW_NAME = "YOLOv8 Detection"
+
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -140,15 +143,20 @@ def run_video(model: YOLO, args) -> None:
             annotated = results[0].plot()
 
             if args.show:
-                cv2.imshow("YOLOv8 Detection", annotated)
+                cv2.imshow(WINDOW_NAME, annotated)
             if writer is not None:
                 writer.write(annotated)
 
             frame_count += 1
             if args.max_frames and frame_count >= args.max_frames:
                 break
-            if args.show and (cv2.waitKey(1) & 0xFF == ord("q")):
-                break
+            if args.show:
+                # Quit on 'q'...
+                if cv2.waitKey(1) & 0xFF == ord("q"):
+                    break
+                # ...or when the window is closed via the X button.
+                if cv2.getWindowProperty(WINDOW_NAME, cv2.WND_PROP_VISIBLE) < 1:
+                    break
     finally:
         cap.release()
         if writer is not None:
