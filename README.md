@@ -8,10 +8,15 @@ Supports **webcam**, **video files**, and **single images**. Shows **bounding bo
 ```
 .
 ├─ README.md
+├─ LICENSE
 ├─ .gitignore
 ├─ requirements.txt
+├─ run.bat                     # Windows convenience launcher
 ├─ bus.jpg                     # bundled sample image
-├─ yolo_output.jpg            # sample detection output
+├─ yolo_output.jpg             # sample detection output
+├─ .github/workflows/ci.yml    # CI: install + tests
+├─ tests/
+│  └─ test_detection.py        # pytest suite (unit + integration)
 └─ yolov8_test/
    ├─ main.py                  # full CLI: webcam / video / image (recommended)
    ├─ yolo_test.py             # minimal single-image quickstart
@@ -81,8 +86,30 @@ python yolov8_test/main.py --source 0 --model yolov8s.pt --conf 0.35
 
 ## 5) Results (proof it works)
 
-**Observed FPS (yolov8n, CPU):** ~12–18 FPS @ 288×640 on my laptop.
-**Observed FPS (yolov8s, CPU/GPU):** ~83–96 ms per 640×480 image.
+Verified single-image detection on the bundled `bus.jpg` (CPU, yolov8n):
+
+```
+$ python yolov8_test/main.py --source bus.jpg --save --no-show
+image 1/1 bus.jpg: 640x480 4 persons, 1 bus, 1 stop sign, 108.7ms
+Detected 6 object(s).
+Saved annotated image to 'yolo_output.jpg'.
+```
+
+Annotated output is saved as `yolo_output.jpg`.
+
+**Observed FPS (yolov8n, CPU):** ~12–18 FPS @ 288×640 on a laptop.
+**Per-image latency (yolov8n, CPU):** ~100–110 ms @ 640×480.
+
+## Testing
+
+```bash
+pip install pytest
+pytest tests/ -v
+```
+
+Unit tests cover source routing and capture error handling; the integration
+test loads YOLOv8n and asserts detections on `bus.jpg` (skipped automatically
+if `ultralytics`/`torch` are unavailable). CI runs the suite on every push/PR.
 
 ## 6) Known Issues / Tips
 
@@ -101,7 +128,7 @@ python yolov8_test/main.py --source 0 --model yolov8s.pt --conf 0.35
 
 ## 8) License
 
-MIT 
+Released under the [MIT License](LICENSE).
 
 ## 9) Acknowledgements
 
